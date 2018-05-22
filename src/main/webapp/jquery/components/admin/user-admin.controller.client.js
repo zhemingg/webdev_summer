@@ -3,7 +3,8 @@
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
-    var $emailFld, $phoneFld, $dateOfBirthFld;
+    var $emailFld, $phoneFld;
+    var $roleFld, $dateOfBirthFld;
     var userService = new AdminUserServiceClient();
     $(main);
 
@@ -25,6 +26,7 @@
         $passwordFld = $('#passwordFld').val();
         $firstNameFld = $('#firstNameFld').val();
         $lastNameFld = $('#lastNameFld').val();
+        $roleFld = $('#roleFld').val();
         $emailFld = $('#emailFld').val();
         $phoneFld = $('#phoneFld').val();
         $dateOfBirthFld = $('#dateOfBirthFld');
@@ -36,6 +38,7 @@
             lastName : $lastNameFld,
             email : $emailFld,
             phone : $phoneFld,
+            role : $roleFld,
             dateOfBirth : $dateOfBirthFld
         }
 
