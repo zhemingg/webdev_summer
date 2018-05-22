@@ -79,7 +79,7 @@ function User(username, password, firstName, lastName, email, phone, dateOfBirth
     function setDateOfBirth() {
         this.dateOfBirth = dateOfBirth;
     }
-    
+
     function getDateOfBirth() {
         return this.dateOfBirth;
     }
