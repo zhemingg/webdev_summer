@@ -3,6 +3,7 @@
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
+    var $emailFld, $phoneFld, $dateOfBirthFld;
     var userService = new AdminUserServiceClient();
     $(main);
 
@@ -20,6 +21,27 @@
     Uses the user service createUser() function to create the new user. Updates the list of users on server response
     */
     function createUser() {
+        $usernameFld = $('#usernameFld').val();
+        $passwordFld = $('#passwordFld').val();
+        $firstNameFld = $('#firstNameFld').val();
+        $lastNameFld = $('#lastNameFld').val();
+        $emailFld = $('#emailFld').val();
+        $phoneFld = $('#phoneFld').val();
+        $dateOfBirthFld = $('#dateOfBirthFld');
+
+        var user = {
+            username : $usernameFld,
+            password : $passwordFld,
+            firstName : $firstNameFld,
+            lastName : $lastNameFld,
+            email : $emailFld,
+            phone : $phoneFld,
+            dateOfBirth : $dateOfBirthFld
+        }
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
 
     }
 
