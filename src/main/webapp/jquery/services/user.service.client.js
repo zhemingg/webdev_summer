@@ -42,5 +42,9 @@ function UserServiceClient() {
     /*
     sends a DELETE request to user Web service with user id as path parameter for user to remove. Receives status
     */
-    function deleteUser(userId, callback) {  }
+    function deleteUser(userId, callback) {
+        return fetch(self.url + '/' + userId, {
+            method: 'delete'
+        })
+    }
 }

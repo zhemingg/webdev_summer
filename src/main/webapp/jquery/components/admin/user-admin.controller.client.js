@@ -74,6 +74,16 @@
     Updates user list on server response
     */
     function deleteUser() {
+        $removeBtn = $(event.currentTarget);
+        var userId = $removeBtn
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        userService
+            .deleteUser(userId)
+            .then(findAllUsers);
 
     }
 
