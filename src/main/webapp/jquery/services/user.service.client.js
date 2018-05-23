@@ -31,7 +31,12 @@ function UserServiceClient() {
     sends a GET request to user Web service with userId as path parameter.
     Receives a single JSON object for the userId
     */
-    function findUserById(userId, callback) {  }
+    function findUserById(userId, callback) {
+        return fetch(self.url + '/' + userId)
+            .then(function(response){
+                return response.json();
+            });
+    }
 
     /*
      accepts a user id and user object with new property values for the user with user id.

@@ -63,8 +63,8 @@
     Reads the user is from the icon id attribute.
     Uses user service findUserById() to retrieve user and then updates the form on server response
     */
-    function findUserById() {
-
+    function findUserById(userId) {
+        return userService.findUserById(userId);
     }
 
 
