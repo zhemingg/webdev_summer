@@ -54,6 +54,11 @@
     */
     function findAllUsers() {
 
+        userService
+            .findAllUsers()
+            .then(renderUsers);
+
+
     }
 
     /*called whenever a particular user needs to be retrieved by their id, as in when a user is selected for editing.
