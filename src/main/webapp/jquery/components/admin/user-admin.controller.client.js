@@ -5,8 +5,7 @@
     var $userRowTemplate, $tbody;
     var $emailFld, $phoneFld;
     var $roleFld, $dateOfBirthFld;
-    var userService = new AdminUserServiceClient();
-    var tbody, template;
+    var userService = new UserServiceClient();
     $(main);
 
     /*
@@ -15,9 +14,9 @@
      Binds action icons, such as create, update, select, and delete, to respective event handlers
     */
     function main() {
-        template = $('.template');
-        tbody = $('tbody');
-        $('#createUser').click(createUser);
+        $userRowTemplate = $('.wbdv-template');
+        $tbody = $('.wbdv-tbody');
+        $('.wbdv-create').click(createUser);
         findAllUsers();
     }
 
@@ -48,7 +47,8 @@
 
         userService
             .createUser(user)
-            .then(findAllUsers);
+
+        console.log(user);
 
     }
 
