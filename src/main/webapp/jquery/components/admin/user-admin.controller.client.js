@@ -4,8 +4,7 @@
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
-    var $emailFld, $phoneFld;
-    var $roleFld, $dateOfBirthFld;
+    var $roleFld;
     var userService = new UserServiceClient();
 
     $(main);
@@ -32,25 +31,20 @@
         $firstNameFld = $('#firstNameFld').val();
         $lastNameFld = $('#lastNameFld').val();
         $roleFld = $('#roleFld').val();
-        $emailFld = $('#emailFld').val();
-        $phoneFld = $('#phoneFld').val();
-        $dateOfBirthFld = $('#dateOfBirthFld');
 
         var user = {
             username : $usernameFld,
             password : $passwordFld,
             firstName : $firstNameFld,
             lastName : $lastNameFld,
-            email : $emailFld,
-            phone : $phoneFld,
-            role : $roleFld,
-            dateOfBirth : $dateOfBirthFld
+            role : $roleFld
         }
 
         userService
             .createUser(user)
+            .then(findAllUsers);
 
-        console.log(user);
+
 
     }
 

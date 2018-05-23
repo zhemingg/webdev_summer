@@ -9,8 +9,8 @@ function UserServiceClient() {
     var self = this;
 
     /*accepts a user object and POSTs it to a user Web service. Receives status*/
-    function createUser(user, callback) {
-        return fetch(this.url, {
+    function createUser(user) {
+        return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
