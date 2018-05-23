@@ -17,7 +17,8 @@
     function main() {
         $userRowTemplate = $('.wbdv-template');
         $tbody = $('.wbdv-tbody');
-        $('.wbdv-create').click(createUser);
+        $createBtn = $('.wbdv-create');
+        $createBtn.click(createUser);
         findAllUsers();
     }
 
@@ -53,12 +54,9 @@
     Uses user service findAllUsers() to retrieve all the users and passes response to renderUsers
     */
     function findAllUsers() {
-
         userService
             .findAllUsers()
             .then(renderUsers);
-
-
     }
 
     /*called whenever a particular user needs to be retrieved by their id, as in when a user is selected for editing.
@@ -80,9 +78,7 @@
     }
 
 
-    function selectUser() {
 
-    }
 
     /*
     handles update user event when user clicks on check mark icon.
@@ -99,6 +95,7 @@
     */
     function renderUser(user) {
 
+
     }
 
     /*
@@ -106,6 +103,27 @@
     clones a table row template for each user instance, populates the table row with the user object properties, adds the table row to the table body
     */
     function renderUsers(users) {
+        $tbody.empty();
+        for (var i = 0; i < users.length; i++) {
+
+            var user = users[i];
+            var clone = $userRowTemplate.clone();
+            clone.attr('id', user.id);
+            $removeBtn = clone.find('#wbdv-remove');
+            $removeBtn.click(deleteUser);
+            $editBtn = clone.find('#wbdv-edit');
+            $editBtn.click(renderUser());
+
+            clone.find('.wbdv-username')
+                .html(user.username)
+                .find('.wbdv-first-name')
+                .html(user.firstName)
+                .find('.wbdv-last-name')
+                .html(user.lastName)
+                .find('.wbdv-role')
+                .html(user.role);
+            $tbody.append(clone);
+        }
 
     }
 })();

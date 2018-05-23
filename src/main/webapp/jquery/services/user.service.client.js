@@ -20,7 +20,7 @@ function UserServiceClient() {
     }
 
     /*sends a GET request to user Web service. Receives a JSON array of all users*/
-    function findAllUsers(callback) {
+    function findAllUsers() {
         return fetch(self.url)
             .then(function (response) {
                 return response.json();
