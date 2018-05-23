@@ -104,8 +104,18 @@
     accepts a user object as parameter and updates the form with the user properties
     */
     function renderUser(user) {
+        $usernameFld.val(user.username);
+        $passwordFld.val(user.password);
+        $firstNameFld.val(user.firstName);
+        $lastNameFld.val(user.lastName);
+        $roleFld.val(user.role);
+    }
 
-
+    /*
+    Select the user when click the edit icon
+    */
+    function selectUser() {
+        
     }
 
     /*
@@ -122,7 +132,7 @@
             $removeBtn = clone.find('#wbdv-remove');
             $removeBtn.click(deleteUser);
             $editBtn = clone.find('#wbdv-edit');
-            $editBtn.click(renderUser());
+            $editBtn.click(selectUser);
 
             clone.find('.wbdv-username')
                 .html(user.username)
