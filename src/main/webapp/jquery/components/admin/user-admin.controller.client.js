@@ -1,4 +1,5 @@
 (function () {
+
     var $usernameFld, $passwordFld;
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
@@ -6,6 +7,7 @@
     var $emailFld, $phoneFld;
     var $roleFld, $dateOfBirthFld;
     var userService = new UserServiceClient();
+
     $(main);
 
     /*
