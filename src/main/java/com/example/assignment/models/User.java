@@ -1,4 +1,4 @@
-package webdev.models;
+package com.example.assignment.models;
 
 import java.util.Date;
 
