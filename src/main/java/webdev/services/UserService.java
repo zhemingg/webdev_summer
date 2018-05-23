@@ -1,10 +1,10 @@
-package com.example.assignment.services;
+package webdev.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.assignment.models.User;
-import com.example.assignment.repositories.UserRepository;
+import webdev.models.User;
+import webdev.repositories.UserRepository;
 
 import java.util.*;
 

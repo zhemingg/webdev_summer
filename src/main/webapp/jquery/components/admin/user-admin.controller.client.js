@@ -6,6 +6,7 @@
     var $emailFld, $phoneFld;
     var $roleFld, $dateOfBirthFld;
     var userService = new AdminUserServiceClient();
+    var tbody, template;
     $(main);
 
     /*
@@ -14,7 +15,10 @@
      Binds action icons, such as create, update, select, and delete, to respective event handlers
     */
     function main() {
-
+        template = $('.template');
+        tbody = $('tbody');
+        $('#createUser').click(createUser);
+        findAllUsers();
     }
 
     /*
