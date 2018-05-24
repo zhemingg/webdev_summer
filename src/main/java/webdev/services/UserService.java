@@ -36,8 +36,13 @@ public class UserService {
 	 * @return all instances of the type
 	 */
 	@GetMapping("/api/user")
-	public List<User> findAllUsers() {
-		return (List<User>) userRepository.findAll();
+	public List<User> findAllUsers(@RequestParam(name = "username", required = false) String username) {
+		if (username != null) {
+			return (List<User>) userRepository.findUserByUsername(username);
+		} else {
+			return (List<User>) userRepository.findAll();
+		}
+
 	}
 
 	/**
@@ -97,6 +102,20 @@ public class UserService {
 	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {
 		userRepository.deleteById(id);
+	}
+
+	/**
+	 * parses the username from a query parameter called username, then uses the
+	 * repository's findUserByUsername() method to retrieve the user and returns the
+	 * user instance
+	 * 
+	 * @param username
+	 *            the username
+	 * @return the user whose username is identity to the given username.
+	 */
+	@GetMapping("api/user/findByUsername")
+	public List<User> findUserByUsername(@RequestParam(name = "username", required = true) String username) {
+		return (List<User>) userRepository.findUserByUsername(username);
 	}
 
 }
