@@ -13,6 +13,7 @@
         $emailFld = $('#email');
         $roleFld = $('#role');
         $dateOfBirthFld = $('#dateOfBirth');
+        console.log($phoneFld.val());
         $updateBtn = $('#updateBtn');
         $updateBtn.click(updateProfile);
         $logoutBtn = $('#logoutBtn');
@@ -21,7 +22,20 @@
 
     }
     function updateProfile() {
+        var user = new User($usernameFld.val(), $passwordFld.val(), $firstNameFld.val(), $lastNameFld.val(),
+            $roleFld.val(), $emailFld.val(), $phoneFld.val(), $dateOfBirthFld.val());
+        //console.log(user.phone);
+        userService
+            .updateProfile(user)
+            .then(function (response) {
+                if (response === null){
+                    alert("The User Had Been Logout");
+                } else {
+                    matchInfo(response);
+                    alert("Updated Successfully");
+                }
 
+            })
 
     }
 
@@ -41,14 +55,22 @@
     }
 
     function matchInfo(user) {
-        console.log(user.username);
-        $usernameFld.val(user.username);
-        $passwordFld.val(user.password);
-        $firstNameFld.val(user.firstName);
-        $lastNameFld.val(user.lastName);
-        $phoneFld.val(user.phone);
-        $emailFld.val(user.email);
-        $roleFld.val(user.role);
-        $dateOfBirthFld.val(user.dateOfBirth);
+        if (user === null){
+            alert("Error");
+        } else {
+            $usernameFld.val(user.username);
+            $passwordFld.val(user.password);
+            $firstNameFld.val(user.firstName);
+            $lastNameFld.val(user.lastName);
+            $phoneFld.val(user.phone);
+            $emailFld.val(user.email);
+            $roleFld.val(user.role);
+            var date;
+            if (user.dateOfBirth !== null) {
+                date = user.dateOfBirth.split('T')[0];
+            }
+            $dateOfBirthFld.val(date);
+        }
+
     }
 })();

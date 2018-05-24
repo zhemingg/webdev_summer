@@ -90,6 +90,9 @@ public class UserService {
 			user.setFirstName(newUser.getFirstName());
 			user.setLastName(newUser.getLastName());
 			user.setRole(newUser.getRole());
+			user.setEmail(newUser.getEmail());
+			user.setPhone(newUser.getPhone());
+			user.setDateOfBirth(newUser.getDateOfBirth());
 			userRepository.save(user);
 			return user;
 		}
@@ -188,8 +191,27 @@ public class UserService {
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
 		User currentUser = (User) session.getAttribute("user");
-		System.out.println(currentUser.getId()+"++++++++++++++++++++++++++");
 		return currentUser;
 	}
+	
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User user, HttpSession session) throws Exception { 
+		//List<User> users = (List<User>) userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
+		User currUser = (User) session.getAttribute("user");
+		//System.out.println("*************"+ user.getFirstName());
+		if (currUser == null) {
+			throw new Exception("Something wrong");
+		} else {
+			//System.out.println("*************"+users.get(0).getId());
+			User newU = updateUser(currUser.getId(), user);
+			session.setAttribute("user", newU);
+			System.out.println(newU.getDateOfBirth());
+			System.out.println(newU.getPhone());
+			System.out.println(user.getDateOfBirth());
+			System.out.println(user.getPhone());
+			return newU;
+		}
+	}
+
 
 }
