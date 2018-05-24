@@ -5,6 +5,14 @@
     var userService = new UserService();
     $(main);
 
-    function main() {  }
-    function register() {  }
+    function main() {
+        $usernameFld = $('#usernameFld');
+        $passwordFld = $('#passwordFld');
+        $verifyPasswordFld = $('#verifyPasswordFld');
+        $registerBtn = $('.btn');
+        $registerBtn.click(register);
+    }
+    function register() {
+
+    }
 })();

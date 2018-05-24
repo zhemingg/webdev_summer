@@ -5,6 +5,7 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
+    this.UserService = UserService;
     this.url = 'http://localhost:8080/api/user';
     var self = this;
 
@@ -68,4 +69,16 @@ function UserServiceClient() {
             method: 'delete'
         })
     }
+
+    /*
+
+     */
+    function UserService() {
+        this.register = register;
+
+        function register() {
+
+        }
+    }
+
 }
