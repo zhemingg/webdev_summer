@@ -7,10 +7,13 @@ function UserServiceClient() {
     this.updateUser = updateUser;
     this.register = register;
     this.login = login;
+    this.getInfo = getInfo;
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register';
     this.loginUrl = 'http://localhost:8080/api/login';
+    this.profile = 'http://localhost:8080/api/profile'
     var self = this;
+
 
     /*accepts a user object and POSTs it to a user Web service. Receives status*/
     function createUser(user) {
@@ -104,6 +107,19 @@ function UserServiceClient() {
             return response;
         });
 
+    }
+
+    function getInfo(){
+        return fetch(self.profile,{
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json().then(function (result) {
+                return result;
+            })
+        });
     }
 
 }

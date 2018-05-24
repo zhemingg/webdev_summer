@@ -39,8 +39,8 @@ public class UserService {
 	 */
 	@GetMapping("/api/user")
 	public List<User> findAllUsers(@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name="password", required=false) String password) {
-		if(username != null && password != null) {
+			@RequestParam(name = "password", required = false) String password) {
+		if (username != null && password != null) {
 			return (List<User>) userRepository.findUserByCredentials(username, password);
 		} else if (username != null) {
 			return (List<User>) userRepository.findUserByUsername(username);
@@ -163,21 +163,33 @@ public class UserService {
 
 	/**
 	 * log in
-	 * @param user the user
-	 * @param session the session
-	 * @return a user whose username and password are matched, otherwise throw an exception.
-	 * @throws Exception if can not log in.
+	 * 
+	 * @param user
+	 *            the user
+	 * @param session
+	 *            the session
+	 * @return a user whose username and password are matched, otherwise throw an
+	 *         exception.
+	 * @throws Exception
+	 *             if can not log in.
 	 */
 	@PostMapping("/api/login")
 	public User login(@RequestBody User user, HttpSession session) throws Exception {
 		List<User> users = (List<User>) userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
 		if (users.size() == 0) {
-			throw new Exception ("can not log in");
+			throw new Exception("can not log in");
 		} else {
 			User user2login = users.get(0);
-			session.setAttribute("user",user2login );
+			session.setAttribute("user", user2login);
 			return user2login;
 		}
+	}
+
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+		User currentUser = (User) session.getAttribute("user");
+		System.out.println(currentUser.getId()+"++++++++++++++++++++++++++");
+		return currentUser;
 	}
 
 }

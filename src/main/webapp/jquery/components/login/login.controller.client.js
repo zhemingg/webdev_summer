@@ -22,7 +22,7 @@
             .then(
                 function (response) {
                     if(response.ok){
-                        console.log('success');
+                        window.location.href = "../profile/profile.template.client.html";
                     } else {
                         alert('Login failed');
                     }
