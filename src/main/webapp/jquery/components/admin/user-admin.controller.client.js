@@ -96,18 +96,17 @@
     function updateUser() {
         if ($userId !== -1){
             var user = new User($('#usernameFld').val(),
-                    $('#passwordFld').val(),
-                    $('#firstNameFld').val(),
-                    $('#lastNameFld').val(),
-                    $('#roleFld').val(),
-                    null, null, null);
-
+                $('#passwordFld').val(),
+                $('#firstNameFld').val(),
+                $('#lastNameFld').val(),
+                $('#roleFld').val(),
+                null, null, null);
             userService.updateUser($userId, user).then(findAllUsers);
-            console.log("updated successfully");
+            alert("Information Updated Successfully");
+            $userId = -1;
         } else {
-            console.log("Can not update information");
+            alert("Information updated Failed");
         }
-        $userId = -1;
     }
 
     /*

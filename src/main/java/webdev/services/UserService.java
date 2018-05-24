@@ -75,7 +75,11 @@ public class UserService {
 		Optional<User> data = userRepository.findById(userId);
 		if (data.isPresent()) {
 			User user = data.get();
+			user.setUsername(newUser.getUsername());
+			user.setPassword(newUser.getPassword());
 			user.setFirstName(newUser.getFirstName());
+			user.setLastName(newUser.getLastName());
+			user.setRole(newUser.getRole());
 			userRepository.save(user);
 			return user;
 		}
