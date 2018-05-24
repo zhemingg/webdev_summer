@@ -8,6 +8,8 @@ import webdev.repositories.UserRepository;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author zheminggao
  *
@@ -117,5 +119,18 @@ public class UserService {
 	public List<User> findUserByUsername(@RequestParam(name = "username", required = true) String username) {
 		return (List<User>) userRepository.findUserByUsername(username);
 	}
+	
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user, HttpSession session) throws Exception { 
+		List<User> users = (List<User>)userRepository.findUserByUsername(user.getUsername());
+		if(users.size() == 0) {
+			createUser(user);
+			session.setAttribute("user", user);
+			return (User) session.getAttribute("user");
+		} else {
+			throw new Exception ("can not register");
+		}
+	}
+
 
 }

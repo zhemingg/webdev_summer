@@ -5,8 +5,9 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
-    this.UserService = UserService;
+    this.register = register;
     this.url = 'http://localhost:8080/api/user';
+    this.registerUrl = 'http://localhost:8080/api/register';
     var self = this;
 
     /*accepts a user object and POSTs it to a user Web service. Receives status*/
@@ -71,14 +72,19 @@ function UserServiceClient() {
     }
 
     /*
-
+    To register a user if the user is valid
      */
-    function UserService() {
-        this.register = register;
-
-        function register() {
-
-        }
+    function register(user) {
+        return fetch(self.registerUrl, {
+            credentials: 'same-origin',
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then (function (response) {
+            return response;
+        });
     }
 
 }
