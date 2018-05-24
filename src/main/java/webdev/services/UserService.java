@@ -155,7 +155,7 @@ public class UserService {
 	 *            password
 	 * @return a user whose username and password are matched.
 	 */
-	@GetMapping("api/user/findByCredentials")
+	@GetMapping("/api/user/findByCredentials")
 	public List<User> findUserByCredentials(@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "password", required = false) String password) {
 		return (List<User>) userRepository.findUserByCredentials(username, password);
@@ -170,12 +170,14 @@ public class UserService {
 	 */
 	@PostMapping("/api/login")
 	public User login(@RequestBody User user, HttpSession session) throws Exception {
-		List<User> users = findAllUsers(user.getUsername(), user.getPassword());
+		List<User> users = (List<User>) userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
 		if (users.size() == 0) {
+			System.out.println("****************");
 			throw new Exception ("can not log in");
 		} else {
-			session.setAttribute("user", user);
-			return (User) session.getAttribute("user");
+			User user2login = users.get(0);
+			session.setAttribute("user",user2login );
+			return user2login;
 		}
 	}
 

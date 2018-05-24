@@ -9,6 +9,7 @@ function UserServiceClient() {
     this.login = login;
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register';
+    this.loginUrl = 'http://localhost:8080/api/login';
     var self = this;
 
     /*accepts a user object and POSTs it to a user Web service. Receives status*/
@@ -91,7 +92,17 @@ function UserServiceClient() {
     /*
     posts credentials including username and password to a user web service.
      */
-    function login() {
+    function login(user) {
+        return fetch(self.loginUrl, {
+            credentials: 'same-origin',
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then (function (response) {
+            return response;
+        });
 
     }
 

@@ -13,7 +13,7 @@
         $registerBtn.click(register);
     }
     function register() {
-    	console.log("abc");
+
         if ($passwordFld.val() !== $verifyPasswordFld.val()){
             alert("Password do not match");
         } else {

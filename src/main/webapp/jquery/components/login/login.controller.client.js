@@ -5,12 +5,28 @@
     $(main);
 
     function main() {
-        $usernameFld = $('#usernameFld');
-        $passwordFld = $('#passwordFld');
+        $usernameFld = $('#username');
+        $passwordFld = $('#password');
         $loginBtn = $('#signinBtn');
         $loginBtn.click(login);
     }
     function login() {
+        var user = {
+            username : $usernameFld.val(),
+            password : $passwordFld.val()
+        }
+
+        console.log(user);
+        userService
+            .login(user)
+            .then(
+                function (response) {
+                    if(response.ok){
+                        console.log('success');
+                    } else {
+                        console.log('failed');
+                    }
+            })
 
     }
 })();
