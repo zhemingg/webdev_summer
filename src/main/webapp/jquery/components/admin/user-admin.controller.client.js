@@ -4,7 +4,7 @@
     var $removeBtn, $editBtn, $createBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
-    var $roleFld;
+    var $roleFld, $userId
     var userService = new UserServiceClient();
 
     $(main);
@@ -63,8 +63,8 @@
     Reads the user is from the icon id attribute.
     Uses user service findUserById() to retrieve user and then updates the form on server response
     */
-    function findUserById(userId) {
-        return userService.findUserById(userId);
+    function findUserById() {
+        return userService.findUserById($userId);
     }
 
 
@@ -75,15 +75,16 @@
     */
     function deleteUser() {
         $removeBtn = $(event.currentTarget);
-        var userId = $removeBtn
+        $userId = $removeBtn
             .parent()
             .parent()
             .parent()
             .attr('id');
 
         userService
-            .deleteUser(userId)
+            .deleteUser($userId)
             .then(findAllUsers);
+        $userId = -1;
 
     }
 
@@ -104,18 +105,24 @@
     accepts a user object as parameter and updates the form with the user properties
     */
     function renderUser(user) {
-        $usernameFld.val(user.username);
-        $passwordFld.val(user.password);
-        $firstNameFld.val(user.firstName);
-        $lastNameFld.val(user.lastName);
-        $roleFld.val(user.role);
+        $('#usernameFld').val(user.username);
+        $('#passwordFld').val(user.password);
+        $('#firstNameFld').val(user.firstName);
+        $('#lastNameFld').val(user.lastName);
+        $('#roleFld').val(user.role);
     }
 
     /*
     Select the user when click the edit icon
     */
     function selectUser() {
-        
+        $editBtn = $(event.currentTarget);
+        $userId = $editBtn
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+        findUserById().then(renderUser);
     }
 
     /*
@@ -133,14 +140,13 @@
             $removeBtn.click(deleteUser);
             $editBtn = clone.find('#wbdv-edit');
             $editBtn.click(selectUser);
-
             clone.find('.wbdv-username')
-                .html(user.username)
-                .find('.wbdv-first-name')
-                .html(user.firstName)
-                .find('.wbdv-last-name')
-                .html(user.lastName)
-                .find('.wbdv-role')
+                .html(user.username);
+            clone.find('.wbdv-first-name')
+                .html(user.firstName);
+            clone.find('.wbdv-last-name')
+                .html(user.lastName);
+            clone.find('.wbdv-role')
                 .html(user.role);
             $tbody.append(clone);
         }
