@@ -42,7 +42,23 @@ function UserServiceClient() {
      accepts a user id and user object with new property values for the user with user id.
      Sends PUT request with user object and user id as path parameter
      */
-    function updateUser(userId, user, callback) { }
+    function updateUser(userId, user, callback) {
+        return fetch(self.url + '/' + userId, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                if (response.bodyUsed) {
+                    return response.json();
+                }
+                else {
+                    return null;
+                }
+            });
+    }
 
     /*
     sends a DELETE request to user Web service with user id as path parameter for user to remove. Receives status

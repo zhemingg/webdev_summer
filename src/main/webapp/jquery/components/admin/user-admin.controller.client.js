@@ -1,7 +1,7 @@
 (function () {
 
     var $usernameFld, $passwordFld;
-    var $removeBtn, $editBtn, $createBtn;
+    var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
     var $roleFld, $userId
@@ -19,6 +19,8 @@
         $tbody = $('.wbdv-tbody');
         $createBtn = $('.wbdv-create');
         $createBtn.click(createUser);
+        $updateBtn = $('.wbdv-update');
+        $updateBtn.click(updateUser);
         findAllUsers();
     }
 
@@ -33,14 +35,7 @@
         $lastNameFld = $('#lastNameFld').val();
         $roleFld = $('#roleFld').val();
 
-        var user = {
-            username : $usernameFld,
-            password : $passwordFld,
-            firstName : $firstNameFld,
-            lastName : $lastNameFld,
-            role : $roleFld
-        }
-
+        var user = new User($usernameFld, $passwordFld, $firstNameFld, $lastNameFld, $roleFld, null, null, null);
         userService
             .createUser(user)
             .then(findAllUsers);
@@ -80,10 +75,11 @@
             .parent()
             .parent()
             .attr('id');
-
-        userService
-            .deleteUser($userId)
-            .then(findAllUsers);
+        if($userId !== -1) {
+            userService
+                .deleteUser($userId)
+                .then(findAllUsers);
+        }
         $userId = -1;
 
     }
@@ -98,7 +94,20 @@
      Updates user list on server response
     */
     function updateUser() {
+        if ($userId !== -1){
+            var user = new User($('#usernameFld').val(),
+                    $('#passwordFld').val(),
+                    $('#firstNameFld').val(),
+                    $('#lastNameFld').val(),
+                    $('#roleFld').val(),
+                    null, null, null);
 
+            userService.updateUser($userId, user).then(findAllUsers);
+            console.log("updated successfully");
+        } else {
+            console.log("Can not update information");
+        }
+        $userId = -1;
     }
 
     /*
