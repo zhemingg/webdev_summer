@@ -172,7 +172,6 @@ public class UserService {
 	public User login(@RequestBody User user, HttpSession session) throws Exception {
 		List<User> users = (List<User>) userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
 		if (users.size() == 0) {
-			System.out.println("****************");
 			throw new Exception ("can not log in");
 		} else {
 			User user2login = users.get(0);

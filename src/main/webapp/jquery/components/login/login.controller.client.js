@@ -24,7 +24,7 @@
                     if(response.ok){
                         console.log('success');
                     } else {
-                        console.log('failed');
+                        alert('Login failed');
                     }
             })
 
