@@ -38,8 +38,11 @@ public class UserService {
 	 * @return all instances of the type
 	 */
 	@GetMapping("/api/user")
-	public List<User> findAllUsers(@RequestParam(name = "username", required = false) String username) {
-		if (username != null) {
+	public List<User> findAllUsers(@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name="password", required=false) String password) {
+		if(username != null && password != null) {
+			return (List<User>) userRepository.findUserByCredentials(username, password);
+		} else if (username != null) {
 			return (List<User>) userRepository.findUserByUsername(username);
 		} else {
 			return (List<User>) userRepository.findAll();
@@ -119,18 +122,61 @@ public class UserService {
 	public List<User> findUserByUsername(@RequestParam(name = "username", required = true) String username) {
 		return (List<User>) userRepository.findUserByUsername(username);
 	}
-	
+
+	/**
+	 * Register a user if the username is valid, otherwise throws an exception.
+	 * 
+	 * @param user
+	 *            a new user will be registered
+	 * @param session
+	 *            a session
+	 * @return the user that registered successfully
+	 * @throws Exception
+	 *             if the username has been taken.
+	 */
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user, HttpSession session) throws Exception { 
-		List<User> users = (List<User>)userRepository.findUserByUsername(user.getUsername());
-		if(users.size() == 0) {
+	public User register(@RequestBody User user, HttpSession session) throws Exception {
+		List<User> users = (List<User>) findAllUsers(user.getUsername(), null);
+		if (users.size() == 0) {
 			createUser(user);
 			session.setAttribute("user", user);
 			return (User) session.getAttribute("user");
 		} else {
-			throw new Exception ("can not register");
+			throw new Exception("can not register");
 		}
 	}
 
+	/**
+	 * find a user by credentials
+	 * 
+	 * @param username
+	 *            username
+	 * @param password
+	 *            password
+	 * @return a user whose username and password are matched.
+	 */
+	@GetMapping("api/user/findByCredentials")
+	public List<User> findUserByCredentials(@RequestParam(name = "username", required = true) String username,
+			@RequestParam(name = "password", required = false) String password) {
+		return (List<User>) userRepository.findUserByCredentials(username, password);
+	}
+
+	/**
+	 * log in
+	 * @param user the user
+	 * @param session the session
+	 * @return a user whose username and password are matched, otherwise throw an exception.
+	 * @throws Exception if can not log in.
+	 */
+	@PostMapping("/api/login")
+	public User login(@RequestBody User user, HttpSession session) throws Exception {
+		List<User> users = findAllUsers(user.getUsername(), user.getPassword());
+		if (users.size() == 0) {
+			throw new Exception ("can not log in");
+		} else {
+			session.setAttribute("user", user);
+			return (User) session.getAttribute("user");
+		}
+	}
 
 }
