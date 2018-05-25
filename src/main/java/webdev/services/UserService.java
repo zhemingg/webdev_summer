@@ -200,7 +200,7 @@ public class UserService {
 		User currUser = (User) session.getAttribute("user");
 		//System.out.println("*************"+ user.getFirstName());
 		if (currUser == null) {
-			throw new Exception("Something wrong");
+			return null;
 		} else {
 			//System.out.println("*************"+users.get(0).getId());
 			User newU = updateUser(currUser.getId(), user);
@@ -213,5 +213,10 @@ public class UserService {
 		}
 	}
 
+	@PostMapping("/api/logout")
+	public void logout
+	(HttpSession session) {
+		session.invalidate();
+	}
 
 }
