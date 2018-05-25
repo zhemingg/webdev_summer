@@ -37,7 +37,7 @@
                 .then(function (response) {
 
                         matchInfo(response);
-                        $('.alert-success').css('display', 'block');
+                        $('.alert-success').css('display', 'block')
 
 
                 })
@@ -60,7 +60,8 @@
             .getInfo()
             .then(
                function (response) {
-                   matchInfo(response);
+                   user = response;
+                   matchInfo(user);
                }
             )
 
