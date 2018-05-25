@@ -25,6 +25,7 @@
             userService.register(user).then(function (response) {
                 if (response.ok){
                     alert("Registered Successfully");
+                    window.location.href="../profile/profile.template.client.html";
                 } else {
                     alert("Sorry, The username have been taken. Please try a new username");
                 }
