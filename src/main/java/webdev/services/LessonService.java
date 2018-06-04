@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import webdev.models.Course;
 import webdev.models.Lesson;
 import webdev.models.Module;
 import webdev.repositories.LessonRepository;
@@ -30,10 +29,12 @@ public class LessonService {
 	@PostMapping("/api/course/{cid}/module/{mid}/lesson")
 	public Lesson createLesson(@PathVariable("mid") int moduleId, @RequestBody Lesson newLesson) {
 		Optional<Module> data = moduleRepository.findById(moduleId);
+		System.out.println("0111111111111111111111*********");
 
 		if (data.isPresent()) {
 			Module module = data.get();
 			newLesson.setMoule(module);
+			System.out.println("111111111111111111111*********");
 			return lessonRepository.save(newLesson);
 		}
 		return null;

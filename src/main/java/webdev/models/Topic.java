@@ -1,19 +1,15 @@
 package webdev.models;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Lesson {
+public class Topic {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -21,35 +17,33 @@ public class Lesson {
 	
 	@ManyToOne
 	@JsonIgnore
-	private Module module;
-	
-	@OneToMany(mappedBy="lesson", cascade=CascadeType.REMOVE, orphanRemoval = true)
-	@JsonIgnore
-	private List<Topic> topics;
-	
+	private Lesson lesson;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
-	public Module getModule() {
-		return module;
-	}
-	public void setModule(Module module) {
-		this.module = module;
-	}
-	public List<Topic> getTopics() {
-		return topics;
-	}
-	public void setTopics(List<Topic> topics) {
-		this.topics = topics;
-	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public Lesson getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
+
+	
+	
 
 }
