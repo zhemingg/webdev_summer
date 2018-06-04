@@ -1,8 +1,8 @@
 package webdev.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import webdev.models.Module;
+import webdev.models.Topic;
 
-public interface TopicRepository extends CrudRepository<Module, Integer>{
+public interface TopicRepository extends CrudRepository<Topic, Integer>{
 	
 }
