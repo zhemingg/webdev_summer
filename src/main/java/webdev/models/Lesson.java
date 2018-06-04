@@ -28,10 +28,10 @@ public class Lesson {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Module getCourse() {
+	public Module getMoule() {
 		return module;
 	}
-	public void setCourse(Module module) {
+	public void setMoule(Module module) {
 		this.module = module;
 	}
 }

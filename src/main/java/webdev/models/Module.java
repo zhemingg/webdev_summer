@@ -1,5 +1,7 @@
 package webdev.models;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,10 @@ public class Module {
 	
 	@OneToMany(mappedBy="module", cascade=CascadeType.REMOVE, orphanRemoval = true)
 	@JsonIgnore
+	private List<Lesson> lessons;
+	
+	@ManyToOne
+	@JsonIgnore
 	private Course course;
 	
 	public int getId() {
@@ -39,6 +45,12 @@ public class Module {
 	}
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	public List<Lesson> getLessons() {
+		return lessons;
+	}
+	public void setLessons(List<Lesson> lessons) {
+		this.lessons = lessons;
 	}
 }
 
