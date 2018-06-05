@@ -1,5 +1,6 @@
 package webdev.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class LessonService {
 		if (data.isPresent()) {
 			Module module = data.get();
 			newLesson.setModule(module);
+			newLesson.getModule().getCourse().setModified(new Date());
 			return lessonRepository.save(newLesson);
 		}
 		return null;
@@ -40,6 +42,10 @@ public class LessonService {
 	
 	@DeleteMapping("/api/lesson/{id}")
 	public void deleteLesson (@PathVariable("id") int id){
+		Optional<Lesson> data = lessonRepository.findById(id);
+		if (data.isPresent()) {
+			data.get().getModule().getCourse().setModified(new Date());
+		}
 		lessonRepository.deleteById(id);
 	}
 	

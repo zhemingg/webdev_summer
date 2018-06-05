@@ -1,5 +1,6 @@
 package webdev.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class ModuleService {
 		if(data.isPresent()) {
 			Course course = data.get();
 			newModule.setCourse(course);
+			newModule.getCourse().setModified(new Date());
 			return moduleRepository.save(newModule);
 		}
 		return null;		
@@ -54,6 +56,10 @@ public class ModuleService {
 	@DeleteMapping("/api/module/{moduleId}")
 	public void deleteModule(@PathVariable("moduleId") int moduleId)
 	{
+		Optional<Module> module = moduleRepository.findById(moduleId);
+		if(module.isPresent()) {
+			module.get().getCourse().setModified(new Date());
+		}
 		moduleRepository.deleteById(moduleId);
 	}
 	
