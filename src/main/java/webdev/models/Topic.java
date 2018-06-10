@@ -1,10 +1,14 @@
 package webdev.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,6 +22,18 @@ public class Topic {
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="topic", cascade=CascadeType.REMOVE, orphanRemoval = true)
+	private List<Widget> widget;
+
+	public List<Widget> getWidget() {
+		return widget;
+	}
+
+	public void setWidget(List<Widget> widget) {
+		this.widget = widget;
+	}
 
 	public int getId() {
 		return id;
