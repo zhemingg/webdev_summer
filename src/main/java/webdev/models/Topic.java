@@ -25,14 +25,14 @@ public class Topic {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="topic", cascade=CascadeType.REMOVE, orphanRemoval = true)
-	private List<Widget> widget;
+	private List<Widget> widgets;
 
-	public List<Widget> getWidget() {
-		return widget;
+	public List<Widget> getWidgets() {
+		return widgets;
 	}
 
-	public void setWidget(List<Widget> widget) {
-		this.widget = widget;
+	public void setWidgets(List<Widget> widgets) {
+		this.widgets = widgets;
 	}
 
 	public int getId() {
