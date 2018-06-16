@@ -21,7 +21,6 @@ public class Module {
 	private String title;
 	
 	@OneToMany(mappedBy="module", cascade=CascadeType.REMOVE, orphanRemoval = true)
-	@JsonIgnore
 	private List<Lesson> lessons;
 	
 	@ManyToOne

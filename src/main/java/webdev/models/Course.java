@@ -22,7 +22,6 @@ public class Course {
 	private Date modified;
 	
 	@OneToMany(mappedBy="course", cascade=CascadeType.REMOVE, orphanRemoval = true)
-	@JsonIgnore
 	private List<Module> modules;
 	
 	public int getId() {

@@ -23,7 +23,6 @@ public class Topic {
 	@JsonIgnore
 	private Lesson lesson;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="topic", cascade=CascadeType.REMOVE, orphanRemoval = true)
 	private List<Widget> widgets;
 

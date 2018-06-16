@@ -15,6 +15,79 @@ public class Widget {
 	@ManyToOne
 	@JsonIgnore
 	private Topic topic;
+	private int widgetOrder = 0;
+	private String name;
+	private String text;
+	private String style;
+	private String width;
+	private String height;
+	private String url;
+	private String size;
+	private String src;
+	enum ListType{
+		ordered, unordered
+	}
+	private ListType listType;
+	public ListType getListType() {
+		return listType;
+	}
+	public void setListType(ListType listType) {
+		this.listType = listType;
+	}
+	public String getSrc() {
+		return src;
+	}
+	public void setSrc(String src) {
+		this.src = src;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	public String getWidth() {
+		return width;
+	}
+	public void setWidth(String width) {
+		this.width = width;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public void setWidgetOrder(int widgetOrder) {
+		this.widgetOrder = widgetOrder;
+	}
+	public int getWidgetOrder() {
+		return widgetOrder;
+	}
 	public int getId() {
 		return Id;
 	}
@@ -33,6 +106,4 @@ public class Widget {
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-
-
 }
