@@ -35,7 +35,7 @@ public class WidgetService {
 		return (List<Widget>) repository.findAll();
 	}
 
-	@PostMapping("/api/course/{cid}/module/{mid}/lesson/{lid}/topic/{tid}/widget")
+	@PostMapping("/api/topic/{tid}/widget")
 	public void saveAllWidgets(@PathVariable("tid") int topicId, @RequestBody List<Widget> widgets) {
 		List<Widget> current = findAllWidgetsForTopic(topicId);
 		Optional<Topic> data = topicRepository.findById(topicId);

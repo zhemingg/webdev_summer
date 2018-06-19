@@ -20,10 +20,24 @@ public class Widget {
 	private String text;
 	private String style;
 	private String width;
+	public String getListItems() {
+		return listItems;
+	}
+	public void setListItems(String listItems) {
+		this.listItems = listItems;
+	}
+	public boolean isEdit() {
+		return edit;
+	}
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
 	private String height;
 	private String url;
 	private String size;
 	private String src;
+	private String listItems;
+	private boolean edit;
 	enum ListType{
 		ordered, unordered
 	}
