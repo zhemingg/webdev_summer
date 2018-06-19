@@ -15,11 +15,24 @@ public class Widget {
 	@ManyToOne
 	@JsonIgnore
 	private Topic topic;
-	private int widgetOrder = 0;
+	private int widgetOrder;
 	private String name;
 	private String text;
 	private String style;
 	private String width;
+	private String height;
+	private String url;
+	private String size;
+	private String src;
+	private String listItems;
+	private String href;
+	private boolean edit;
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
 	public String getListItems() {
 		return listItems;
 	}
@@ -32,12 +45,7 @@ public class Widget {
 	public void setEdit(boolean edit) {
 		this.edit = edit;
 	}
-	private String height;
-	private String url;
-	private String size;
-	private String src;
-	private String listItems;
-	private boolean edit;
+
 	enum ListType{
 		ordered, unordered
 	}
