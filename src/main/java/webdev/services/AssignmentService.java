@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.models.Assignment;
-import webdev.models.Lesson;
 import webdev.models.Topic;
 import webdev.models.Widget;
 import webdev.repositories.AssignmentRepository;
@@ -54,7 +53,7 @@ public class AssignmentService {
 			List<Widget> widgets = topic.getWidgets();
 			List<Widget> res = new LinkedList<>();
 			for (Widget w:widgets) {
-				if (w.getWidgetType().equals("assignment"))
+				if (w != null && w.getWidgetType().equals("assignment"))
 					res.add(w);
 			}
 			
@@ -82,4 +81,17 @@ public class AssignmentService {
 		repository.deleteById(assignmentId);
 	}
 
+	@PutMapping("/api/assignment/{aId}")
+	public Assignment updateAssignemnt(@PathVariable("aId") int assignmentId, @RequestBody Assignment newAssignment) {
+		Optional<Assignment> data = repository.findById(assignmentId);
+		if (data.isPresent()) {
+			Assignment assignment = data.get();
+			assignment.setDescription(newAssignment.getDescription());
+			assignment.setTitle(newAssignment.getTitle());
+			assignment.setPoints(newAssignment.getPoints());
+			repository.save(assignment);
+			return assignment;
+		}
+		return null;
+	}
 }

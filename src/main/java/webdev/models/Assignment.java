@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Assignment extends Widget{
 	private String title;
 	private String description;
-	private double points;
+	private String points;
 	public String getTitle() {
 		return title;
 	}
@@ -19,10 +19,10 @@ public class Assignment extends Widget{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getPoints() {
+	public String getPoints() {
 		return points;
 	}
-	public void setPoints(double points) {
+	public void setPoints(String points) {
 		this.points = points;
 	}
 	
