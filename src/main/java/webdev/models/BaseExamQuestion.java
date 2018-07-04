@@ -17,11 +17,20 @@ public class BaseExamQuestion {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	private String subtitle;
+	private String points;
 	private String type;
+	private String description;
+
 	@ManyToOne
 	@JsonIgnore
 	private Exam exam;
+	private String questionType;
+	public String getQuestionType() {
+		return questionType;
+	}
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
 	public int getId() {
 		return id;
 	}
@@ -34,19 +43,12 @@ public class BaseExamQuestion {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSubtitle() {
-		return subtitle;
-	}
-	public void setSubtitle(String subtitle) {
-		this.subtitle = subtitle;
-	}
-	public int getPoints() {
+	public String getPoints() {
 		return points;
 	}
-	public void setPoints(int points) {
+	public void setPoints(String points) {
 		this.points = points;
 	}
-	private int points;
 	public String getType() {
 		return type;
 	}
@@ -58,5 +60,11 @@ public class BaseExamQuestion {
 	}
 	public void setExam(Exam exam) {
 		this.exam = exam;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

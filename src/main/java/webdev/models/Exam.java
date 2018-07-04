@@ -2,18 +2,17 @@ package webdev.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Exam extends Widget {
 	private String title;
 	private String description;
 	private String points;
-	@OneToMany(mappedBy="exam")
-	@JsonIgnore
+	@OneToMany(mappedBy="exam", cascade=CascadeType.REMOVE, orphanRemoval = true)
 	private List<BaseExamQuestion> questions;
 	public String getTitle() {
 		return title;
