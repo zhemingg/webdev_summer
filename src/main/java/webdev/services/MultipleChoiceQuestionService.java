@@ -89,7 +89,7 @@ public class MultipleChoiceQuestionService {
 			multipleChoiceQuestion.setDescription(newMultipleChoiceQuestion.getDescription());
 			multipleChoiceQuestion.setTitle(newMultipleChoiceQuestion.getTitle());
 			multipleChoiceQuestion.setPoints(newMultipleChoiceQuestion.getPoints());
-//			multipleChoiceQuestion.setChoices(newMultipleChoiceQuestion.getChoices());
+			multipleChoiceQuestion.setChoices(newMultipleChoiceQuestion.getChoices());
 			multipleChoiceQuestion.setCorrectChoice(newMultipleChoiceQuestion.getCorrectChoice());
 			repository.save(multipleChoiceQuestion);
 			return multipleChoiceQuestion;
