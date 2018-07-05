@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import webdev.models.Assignment;
 import webdev.models.BaseExamQuestion;
 import webdev.models.Exam;
 import webdev.repositories.BaseExamQuestionRepository;

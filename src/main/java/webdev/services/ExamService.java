@@ -37,40 +37,7 @@ public class ExamService {
 	
 	@Autowired
 	TopicRepository topicRepository;
-//	@Autowired
-//	TrueFalseQuestionRepository trueFalseRepository;
-//	@Autowired
-//	MultipleChoicesQuestionRepository mutiRepo;
 
-//	@GetMapping("/api/multi/{questionId}")
-//	public MultipleChoiceQuestion findMultiQuestionById(@PathVariable("questionId") int questionId) {
-//		Optional<MultipleChoiceQuestion> optional = mutiRepo.findById(questionId);
-//		if(optional.isPresent()) {
-//			return optional.get();
-//		}
-//		return null;
-//	}
-//
-//	@GetMapping("/api/truefalse/{questionId}")
-//	public TrueFalseQuestion findTrueFalseQuestionById(@PathVariable("questionId") int questionId) {
-//		Optional<TrueFalseQuestion> optional = trueFalseRepository.findById(questionId);
-//		if(optional.isPresent()) {
-//			return optional.get();
-//		}
-//		return null;
-//	}
-//	
-//	@GetMapping("/api/exam/{examId}/question")
-//	public List<Question> findAllQuestionsForExam(@PathVariable("examId") int examId) {
-//		Optional<Exam> optionalExam = examRepository.findById(examId);
-//		if(optionalExam.isPresent()) {
-//			Exam exam = optionalExam.get();
-//			List<Question> questions = exam.getQuestions();
-//			int count = questions.size();
-//			return questions;
-//		}
-//		return null;
-//	}
 	
 	@GetMapping("/api/exam")
 	public List<Exam> findAllExam() {
@@ -103,7 +70,7 @@ public class ExamService {
 	}
 	
 	@PostMapping("/api/topic/{tid}/exam")
-	public Exam createAssignment(@PathVariable("tid") int topicId, @RequestBody Exam exam) {
+	public Exam createExam(@PathVariable("tid") int topicId, @RequestBody Exam exam) {
 		Optional<Topic> data = topicRepository.findById(topicId);
 		if (data.isPresent()) {
 			Topic topic = data.get();
@@ -117,19 +84,19 @@ public class ExamService {
 
 	
 	@DeleteMapping("/api/exam/{eId}")
-	public void deleteAssignment( @PathVariable("eId") int examId) {
+	public void deleteExam( @PathVariable("eId") int examId) {
 		examRepository.deleteById(examId);
 	}
 
 	@PutMapping("/api/exam/{eId}")
-	public Exam updateAssignemnt(@PathVariable("eId") int examId, @RequestBody Exam newExam) {
+	public Exam updateExam(@PathVariable("eId") int examId, @RequestBody Exam newExam) {
 		Optional<Exam> data = examRepository.findById(examId);
 		if (data.isPresent()) {
 			Exam exam = data.get();
 			exam.setDescription(newExam.getDescription());
 			exam.setTitle(newExam.getTitle());
 			exam.setPoints(newExam.getPoints());
-			exam.setBaseExamQuestion(newExam.getBaseExamQuestion());
+			//exam.setBaseExamQuestion(newExam.getBaseExamQuestion());
 			examRepository.save(exam);
 			return exam;
 		}
