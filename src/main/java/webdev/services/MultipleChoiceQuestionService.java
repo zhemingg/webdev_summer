@@ -31,7 +31,6 @@ public class MultipleChoiceQuestionService {
 
 	@GetMapping("/api/multipleChoiceQuestion")
 	public List<MultipleChoiceQuestion> findAllMultipleChoiceQuestion() {
-		System.out.println("here");
 		return (List<MultipleChoiceQuestion>) repository.findAll();
 	}
 	
